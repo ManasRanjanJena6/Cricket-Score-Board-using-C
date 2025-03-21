@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cricket Scoreboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Cricket Scoreboard</h1>
+        </header>
+
+        <div class="scoreboard">
+            <div class="team team1">
+                <div class="team-header">
+                    <h2 id="team1-name">Team 1</h2>
+                    <button class="edit-team-name" onclick="showEditTeamNameModal(1)"><i class="fas fa-pencil-alt"></i></button>
+                </div>
+                <div class="score-container">
+                    <div class="main-score">
+                        <span id="team1-runs">0</span>/<span id="team1-wickets">0</span>
+                    </div>
+                    <div class="overs">
+                        Overs: <span id="team1-overs">0.0</span>
+                    </div>
+                    <div class="extras">
+                        Extras: <span id="team1-extras">0</span>
+                    </div>
+                </div>
+                <div class="controls">
+                    <button onclick="updateScore(1, 'runs', 1)">+1 Run</button>
+                    <button onclick="updateScore(1, 'runs', 4)">+4 Runs</button>
+                    <button onclick="updateScore(1, 'runs', 6)">+6 Runs</button>
+                    <button onclick="updateScore(1, 'wickets', 1)">+1 Wicket</button>
+                    <button onclick="updateScore(1, 'extras', 1)">+1 Extra</button>
+                    <button onclick="updateOvers(1, 0.1)">+0.1 Over</button>
+                </div>
+            </div>
+
+            <div class="team team2">
+                <div class="team-header">
+                    <h2 id="team2-name">Team 2</h2>
+                    <button class="edit-team-name" onclick="showEditTeamNameModal(2)"><i class="fas fa-pencil-alt"></i></button>
+                </div>
+                <div class="score-container">
+                    <div class="main-score">
+                        <span id="team2-runs">0</span>/<span id="team2-wickets">0</span>
+                    </div>
+                    <div class="overs">
+                        Overs: <span id="team2-overs">0.0</span>
+                    </div>
+                    <div class="extras">
+                        Extras: <span id="team2-extras">0</span>
+                    </div>
+                    <div class="target-display" id="targetDisplay" style="display: none;">
+                        Target: <span id="targetScore">0</span> (<span id="targetOvers">0.0</span> overs)
+                    </div>
+                </div>
+                <div class="controls">
+                    <button onclick="updateScore(2, 'runs', 1)">+1 Run</button>
+                    <button onclick="updateScore(2, 'runs', 4)">+4 Runs</button>
+                    <button onclick="updateScore(2, 'runs', 6)">+6 Runs</button>
+                    <button onclick="updateScore(2, 'wickets', 1)">+1 Wicket</button>
+                    <button onclick="updateScore(2, 'extras', 1)">+1 Extra</button>
+                    <button onclick="updateOvers(2, 0.1)">+0.1 Over</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="match-controls">
+            <button onclick="resetScores()">Reset Scores</button>
+            <button onclick="swapTeams()">Swap Teams</button>
+        </div>
+    </div>
+
+    <!-- Team Name Edit Modal -->
+    <div id="teamNameModal" class="modal">
+        <div class="modal-content">
+            <h3>Edit Team Name</h3>
+            <div class="form-group">
+                <label for="editTeamName">New Team Name:</label>
+                <input type="text" id="editTeamName" required>
+            </div>
+            <div class="modal-buttons">
+                <button onclick="updateTeamName()">Save</button>
+                <button onclick="closeTeamNameModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Target Setting Modal -->
+    <div id="targetModal" class="modal">
+        <div class="modal-content">
+            <h3>Set Target for Second Innings</h3>
+            <div class="form-group">
+                <label for="targetRuns">Target Runs:</label>
+                <input type="number" id="targetRuns" required min="1">
+            </div>
+            <div class="form-group">
+                <label for="targetOversInput">Target Overs:</label>
+                <input type="number" id="targetOversInput" required min="1" step="0.1">
+            </div>
+            <div class="modal-buttons">
+                <button onclick="setTarget()">Set Target</button>
+                <button onclick="closeTargetModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Celebration Modal -->
+    <div id="celebrationModal" class="modal celebration-modal">
+        <div class="modal-content celebration-content">
+            <div class="celebration-icon">
+                <i class="fas fa-trophy"></i>
+            </div>
+            <h2 id="winningTeamName">Team Name</h2>
+            <p class="celebration-text">has won the match!</p>
+            <div class="celebration-stats">
+                <p>Final Score: <span id="winningTeamScore">0/0</span></p>
+                <p>Overs: <span id="winningTeamOvers">0.0</span></p>
+            </div>
+            <button onclick="closeCelebrationModal()" class="celebration-button">Continue</button>
+        </div>
+    </div>
+
+    <!-- Confetti Container -->
+    <div id="confetti-container"></div>
+
+    <footer style="text-align: center; padding: 20px; color: #1a2a6c; font-size: 0.9em; font-family: 'Arial', sans-serif; position: fixed; bottom: 0; left: 0; width: 100%;">
+        Copyright &copy; 2025 Harsh Aryan. All rights reserved.
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 

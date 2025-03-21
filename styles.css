@@ -1,0 +1,356 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+header h1 {
+    color: white;
+    font-size: 2.5em;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+}
+
+.scoreboard {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.team {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    padding: 20px;
+    min-width: 300px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.team h2 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.8em;
+}
+
+.team-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.team-header h2 {
+    margin: 0;
+    display: inline-block;
+}
+
+.edit-team-name {
+    background: #4CAF50;
+    padding: 8px;
+    font-size: 0.9em;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    margin-left: 10px;
+}
+
+.edit-team-name i {
+    color: white;
+    font-size: 0.9em;
+}
+
+.edit-team-name:hover {
+    background: #45a049;
+    transform: rotate(15deg);
+}
+
+.score-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.main-score {
+    font-size: 3em;
+    font-weight: bold;
+    color: #1a2a6c;
+    margin-bottom: 10px;
+}
+
+.overs, .extras {
+    font-size: 1.2em;
+    color: #666;
+    margin: 5px 0;
+}
+
+.controls {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: 20px;
+}
+
+button {
+    background: #1a2a6c;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background: #2a3a7c;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.match-controls {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 40px;
+}
+
+.match-controls button {
+    background: #b21f1f;
+    padding: 15px 30px;
+    font-size: 1.1em;
+}
+
+.match-controls button:hover {
+    background: #c22f2f;
+}
+
+@media (max-width: 768px) {
+    .scoreboard {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .team {
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .controls {
+        grid-template-columns: 1fr;
+    }
+
+    .match-controls {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 300px;
+}
+
+.modal-content h3 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.modal-buttons button:first-child {
+    background: #4CAF50;
+}
+
+.modal-buttons button:last-child {
+    background: #f44336;
+}
+
+.modal-buttons button:hover {
+    transform: translateY(-2px);
+}
+
+.target-display {
+    font-size: 1.4em;
+    color: #b21f1f;
+    font-weight: bold;
+    margin-top: 10px;
+    padding: 10px;
+    background: rgba(178, 31, 31, 0.1);
+    border-radius: 5px;
+}
+
+.modal-content .form-group {
+    margin-bottom: 15px;
+}
+
+.modal-content .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+    font-weight: bold;
+}
+
+.modal-content .form-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1em;
+}
+
+.modal-content .form-group input:focus {
+    outline: none;
+    border-color: #4CAF50;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+}
+
+/* Celebration Modal Styles */
+.celebration-modal {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.celebration-content {
+    text-align: center;
+    padding: 40px;
+    background: linear-gradient(135deg, #1a2a6c, #b21f1f);
+    color: white;
+    border-radius: 20px;
+    animation: modalPop 0.5s ease-out;
+}
+
+@keyframes modalPop {
+    0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
+    100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}
+
+.celebration-icon {
+    font-size: 4em;
+    margin-bottom: 20px;
+    color: #ffd700;
+    animation: trophyShine 2s infinite;
+}
+
+@keyframes trophyShine {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.celebration-content h2 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    color: #ffd700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.celebration-text {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.celebration-stats {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+.celebration-stats p {
+    font-size: 1.4em;
+    margin: 10px 0;
+}
+
+.celebration-button {
+    background: #ffd700;
+    color: #1a2a6c;
+    padding: 15px 40px;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 20px;
+}
+
+.celebration-button:hover {
+    background: #ffed4a;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Confetti Styles */
+#confetti-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1001;
+}
+
+.confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: #f00;
+    opacity: 0.7;
+    animation: confetti-fall 3s linear forwards;
+}
+
+@keyframes confetti-fall {
+    0% {
+        transform: translateY(-100vh) rotate(0deg);
+        opacity: 0.7;
+    }
+    100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+    }
+} 
